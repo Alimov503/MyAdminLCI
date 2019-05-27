@@ -1,32 +1,15 @@
 <template>
-  <v-toolbar
+  <v-toolbar 
     id="core-toolbar"
-
     flat
     prominent
     style="background: #eee;"
   >
-    <div class="v-toolbar-title">
-      <v-toolbar-title
-        class="tertiary--text font-weight-light"
-      >
-        <v-btn
-          v-if="responsive"
-          class="default v-btn--simple"
-          dark
-          icon
-          @click.stop="onClickBtn"
-        >
-          <v-icon>mdi-view-list</v-icon>
-        </v-btn>
-        {{ title }}
-      </v-toolbar-title>
-    </div>
-
-    <v-spacer />
+   
+      <v-spacer/>
     <v-toolbar-items>
       <v-flex
-        align-center
+      align-center
         layout
         py-2
       >

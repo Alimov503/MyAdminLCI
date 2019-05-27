@@ -36,7 +36,7 @@
   @include alert-shadow('success', $brand-success);
   @include alert-shadow('error', $brand-danger);
   @include alert-shadow('warning', $brand-warning);
-  @include alert-shadow('purple', $brand-primary);
+  @include alert-shadow('info', $brand-primary);
 }
 
 .v-snack {
@@ -44,5 +44,5 @@
   @include notifications-color('success', $brand-success);
   @include notifications-color('error', $brand-danger);
   @include notifications-color('warning', $brand-warning);
-  @include notifications-color('purple', $brand-primary);
+  @include notifications-color('info', $brand-primary);
 }

@@ -13,27 +13,18 @@
       >
         <material-card
           color="green"
-          title="Edit Profile"
-          text="Complete your profile"
+          title="Edit Student Profile"
         >
           <v-form>
             <v-container py-0>
               <v-layout wrap>
                 <v-flex
                   xs12
-                  md4
-                >
-                  <v-text-field
-                    label="Company (disabled)"
-                    disabled/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
+                  md12
                 >
                   <v-text-field
                     class="purple-input"
-                    label="User Name"
+                    label="Student's full name"
                   />
                 </v-flex>
                 <v-flex
@@ -49,17 +40,43 @@
                   md6
                 >
                   <v-text-field
-                    label="First Name"
+                    label="Phone number"
                     class="purple-input"/>
                 </v-flex>
-                <v-flex
+              
+                 <v-flex
                   xs12
-                  md6
-                >
+                  md4>
                   <v-text-field
-                    label="Last Name"
+                    label="Emergency-call number"
                     class="purple-input"/>
                 </v-flex>
+
+                <v-flex xs12 sm6 md5>
+                  <v-menu
+                    v-model="menu2"
+                    dark
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    lazy
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    min-width="290px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="date"
+                        label="Pick date of birthday"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                  </v-menu>
+                </v-flex>
+
                 <v-flex
                   xs12
                   md12
@@ -68,32 +85,12 @@
                     label="Adress"
                     class="purple-input"/>
                 </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="City"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="Country"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    class="purple-input"
-                    label="Postal Code"
-                    type="number"/>
-                </v-flex>
+                
+  
                 <v-flex xs12>
                   <v-textarea
                     class="purple-input"
-                    label="About Me"
+                    label="About student"
                     value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                   />
                 </v-flex>
@@ -113,6 +110,7 @@
           </v-form>
         </material-card>
       </v-flex>
+
       <v-flex
         xs12
         md4
@@ -128,14 +126,18 @@
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>
-            <h4 class="card-title font-weight-light">Alec Thompson</h4>
-            <p class="card-description font-weight-light">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
+            
+            <h4 class="card-title font-weight-light">Full name</h4>
             <v-btn
-              color="success"
+              color="warning"
               round
               class="font-weight-light"
-            >Follow</v-btn>
+            > Change profile picture </v-btn>
+            <v-btn
+              color="red"
+              round
+              class="font-weight-light"
+            > Delete profile </v-btn>
           </v-card-text>
         </material-card>
       </v-flex>
@@ -145,6 +147,25 @@
 
 <script>
 export default {
-  //
+  data(){
+    return {
+      date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      modal: false,
+      menu2: false,
+
+    }
+  },
+  methods: {
+  moment: function () {
+    return moment();
+  }
+},
+filters: {
+  moment: function (date) {
+    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+  }
+}
+
 }
 </script>

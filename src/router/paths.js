@@ -10,24 +10,6 @@ export default [
     view: 'Dashboard'
   },
   {
-    path: '/user-profile',
-    name: 'User Profile',
-    view: 'UserProfile'
-  },
-  {
-    path: '/table-list',
-    name: 'Table List',
-    view: 'TableList'
-  },
-  {
-    path: '/typography',
-    view: 'Typography'
-  },
-  {
-    path: '/icons',
-    view: 'Icons'
-  },
-  {
     path: '/maps',
     view: 'Maps'
   },
@@ -36,8 +18,136 @@ export default [
     view: 'Notifications'
   },
   {
-    path: '/upgrade',
-    name: 'Upgrade to PRO',
-    view: 'Upgrade'
-  }
+    path: '/attendance',
+    view: 'Attendance'
+  },
+  
+  
+
+  {
+    path: '/add-student',
+    view: "AddStudent",
+
+  },
+  {
+    path: '/students-list',
+    view: "StudentList",
+    
+  },
+  {
+    path: '/student-profile',
+    view: "studentProfile",
+   
+  },
+  {
+    path: '/edit-student-profile',
+    name: 'editStudentProfile',
+    view: 'editStudentProfile'
+  },
+  {
+    path: '/edit-teacher-profile',
+    name: 'editTeacherProfile',
+    view: 'editTeacherProfile'
+  },
+  {
+    path: '/add-teacher',
+    view: "AddTeacher",
+    
+  },
+  {
+    path: '/teachers-list',
+    view: "TeacherList",
+    
+  },
+  {
+    path: '/teacher-profile',
+    view: "teacherProfile",
+  
+  },
+  {
+    path: '/add-group',
+    view: "AddGroup",
+   
+  },
+  {
+    path: '/groups-list',
+    view: "GroupList",
+   
+  },
+  {
+    path: '/add-subject',
+    view: "AddSubject",
+   
+  },
+  {
+    path: '/subjects-list',
+    view: "SubjectList",
+  
+  },
+  {
+    path: '/add-exam',
+    view: "AddExam",
+    
+  },
+  {
+    path: '/exams-list',
+    view: "ExamList",
+   
+  },
+  {
+    path: '/teachers-fee',
+    view: "TeachersFee",
+ 
+  },
+  {
+    path: '/incoming-by-subject',
+    view: "incomingBySubjects",
+  
+  },
+  {
+    path: '/incoming-by-groups',
+    view: "incomingByGroups",
+  
+  },
+  {
+    path: '/groups-incoming',
+    view: "groupsIncoming",
+  
+  },
+  {
+    path: '/monthly-consumption',
+    view: 'MonthlyConsumption',
+    
+  },
+  {
+    path:'/calculation' ,
+    view: "Calculation",
+
+  },
+  {
+    path:'/noticeboard',
+    view: "NoticeBoard",
+    
+  },
+  {
+    path: '/calendar',
+    view: "Calendar",
+    
+  },
+  {
+    path: '/settings',
+    view: "Settings",
+    
+  },
+  {
+    path: '/about',
+    view: "About",
+    
+  },
+  {
+    path:'/room-control' ,
+    view: "RoomControl",
+    
+  },
+
 ]

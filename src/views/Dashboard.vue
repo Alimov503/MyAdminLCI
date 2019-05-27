@@ -90,6 +90,7 @@
           </template>
         </material-chart-card>
       </v-flex>
+      
       <v-flex
         sm6
         xs12
@@ -153,6 +154,9 @@
           sub-text="Just Updated"
         />
       </v-flex>
+
+
+
       <v-flex
         md12
         lg6
@@ -189,6 +193,9 @@
           </v-data-table>
         </material-card>
       </v-flex>
+
+
+      
       <v-flex
         md12
         lg6

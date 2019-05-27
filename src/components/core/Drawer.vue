@@ -1,5 +1,7 @@
 <template>
   <v-navigation-drawer
+    scroll-target="v-navigation-drawer"
+    inverted-scroll="true"
     id="app-drawer"
     v-model="inputValue"
     app
@@ -7,76 +9,88 @@
     floating
     persistent
     mobile-break-point="991"
-    width="260"
+    width="310"
   >
+    <!-- Background image -->
     <v-img
       :src="image"
       height="100%"
+      
     >
       <v-layout
         class="fill-height"
         tag="v-list"
         column
+        scroll-off-screen="" scroll-target="#scrolling-techniques"
       >
         <v-list-tile avatar>
           <v-list-tile-avatar
             color="white"
-          >
+          > 
+            <!-- logo -->
             <v-img
               :src="logo"
-              height="34"
+              height="99"
               contain
             />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+           Cambridge LC
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
         <v-list-tile
           v-if="responsive"
         >
-          <v-text-field
-            class="purple-input search-input"
-            label="Search..."
-            color="purple"
-          />
         </v-list-tile>
-        <v-list-tile
-          v-for="(link, i) in links"
-          :key="i"
-          :to="link.to"
-          :active-class="color"
-          avatar
-          class="v-list-item"
-        >
-          <v-list-tile-action>
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title
-            v-text="link.text"
-          />
-        </v-list-tile>
-        <v-list-tile
-          disabled
-          active-class="primary"
-          class="v-list-item v-list__tile--buy"
-          to="/upgrade"
-        >
-          <v-list-tile-action>
-            <v-icon>mdi-package-up</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="font-weight-light">
-            Upgrade To PRO
-          </v-list-tile-title>
-        </v-list-tile>
+
+          <!-- LIST -->
+         <v-list-tile router :to="main.to" :active-class="color" :key="i" v-for="(main, i) in mains" >
+            <v-list-tile-action>
+              <v-icon v-html="main.icon"></v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content :active-class="color">
+              <v-list-tile-title :active-class="color" v-text="main.title"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
+        <v-list-group
+            v-for="item in itemss"
+            :key="item.title"
+            v-model="item.active"
+            no-action
+            
+          >
+            <template v-slot:activator>
+              <v-list-tile >
+                <v-list-tile-action>
+              <v-icon   v-html="item.action"></v-icon>
+            </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title :active-class="color">{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </template>
+
+            <v-list-tile v-for="subItem in item.subs" :key="subItem.title"
+            :active-class="color" router :to='subItem.to' >
+               <v-list-tile-action>
+                <v-icon  v-html="subItem.action"></v-icon>
+              </v-list-tile-action>
+               <v-list-tile-content>
+              <v-list-tile-title  v-text="subItem.title"></v-list-tile-title>
+            </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
+
+        
       </v-layout>
     </v-img>
   </v-navigation-drawer>
 </template>
 
 <script>
-// Utilities
+
 import {
   mapMutations,
   mapState
@@ -84,44 +98,58 @@ import {
 
 export default {
   data: () => ({
-    logo: './img/vuetifylogo.png',
-    links: [
-      {
-        to: '/dashboard',
-        icon: 'mdi-view-dashboard',
-        text: 'Dashboard'
-      },
-      {
-        to: '/user-profile',
-        icon: 'mdi-account',
-        text: 'User Profile'
-      },
-      {
-        to: '/table-list',
-        icon: 'mdi-clipboard-outline',
-        text: 'Table List'
-      },
-      {
-        to: '/typography',
-        icon: 'mdi-format-font',
-        text: 'Typography'
-      },
-      {
-        to: '/icons',
-        icon: 'mdi-chart-bubble',
-        text: 'Icons'
-      },
-      {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps'
-      },
-      {
-        to: '/notifications',
-        icon: 'mdi-bell',
-        text: 'Notifications'
-      }
-    ],
+    logo: './img/c.jpg',
+    itemss: [
+        {
+          action: "mdi-school",
+          title: "Students",
+          subs: [{ title: "Add Student", action: 'mdi-account-plus', to : '/add-student' },
+           { title: "Students List", action: 'mdi-format-list-bulleted', to : '/students-list' }]
+        },
+        {
+          action: "mdi-account",
+          title: "Teachers",
+          subs: [
+            { title: "Add teachers", action: 'mdi-account-plus', to : '/add-teacher' },
+            { title: "Teachers list", action: 'mdi-format-list-bulleted', to : '/teachers-list' }
+          ]
+        },
+        {
+          action: "mdi-account-multiple-outline",
+          title: "Groups",
+          subs: [{ title: "Add groups", action: 'mdi-account-multiple-plus', to : '/add-group' },
+           { title: "Groups list", action: 'mdi-format-list-bulleted', to : '/groups-list' } ]
+        },
+        {
+          action: "mdi-office-building",
+          title: "Branch Office",  
+          subs:  [
+            { title: "Exams list", action: 'mdi-feather', to : '/exams-list' },
+           { title: "Subjects",  action: "mdi-book-multiple", to : '/subjects-list' },
+           { title: "Room Control", action: 'mdi-cash-multiple', to : '/room-control' },          
+           { title: "Noticeboard", action: 'mdi-bulletin-board', to : '/noticeboard' },
+            ]
+        },
+         {
+          action: "mdi-calculator-variant",
+          title: "Accaunting",
+          subs: [{ title: 'Incoming by subjects', action:'mdi-currency-usd', to : '/incoming-by-subject'},
+          { title: "Teachers fee", action: 'mdi-cash-multiple', to : '/teachers-fee' },            
+          { title: 'Monthly consumption', action:'mdi-cash', to : '/monthly-consumption'},
+          { title: "Calculation", action: 'mdi-calculator', to : '/calculation' } ]
+        },
+        {
+          action: "mdi-settings",
+          title: "Settings",
+           subs: [{ title: "setting", action: 'mdi-settings', to : '/settings' },
+           { title: "About us", action: 'mdi-information-variant', to : '/about' } ]
+    
+        },       
+      ],
+      mains: [
+        { icon: "mdi-view-dashboard", title: "Dashboard", to: "/" },
+        { icon: "mdi-spellcheck", title: "Attendance", to: "/attendance" }
+      ],
     responsive: false
   }),
   computed: {
@@ -170,14 +198,10 @@ export default {
     }
 
     .v-image__image--contain {
-      top: 9px;
-      height: 60%;
+      top: 2.2px;
+      height: 95%;
     }
 
-    .search-input {
-      margin-bottom: 30px !important;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
+    
   }
 </style>
