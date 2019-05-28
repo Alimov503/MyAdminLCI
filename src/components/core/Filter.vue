@@ -56,7 +56,7 @@
               @click.native="setImage(img)"
             />
           </v-flex>
-         
+
           <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase">
               <div class=" sidebar-filter">

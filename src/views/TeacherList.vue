@@ -1,100 +1,140 @@
 <template>
-    <div>
-        <h1 class="grey--text text-xs-center">Teachers list</h1>
-        <v-container
-        fill-height
-        fluid
-        grid-list-xl>
-        <v-layout>
-          <v-flex>
-      <v-toolbar flat color="white">
+  <div>
+    <h1 class="grey--text text-xs-center">Teachers list</h1>
+    <v-container
+      fill-height
+      fluid
+      grid-list-xl>
+      <v-layout>
+        <v-flex>
+          <v-toolbar
+            flat
+            color="white">
 
-          <!-- adding new teacher -->
-        <v-spacer></v-spacer> 
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-             <v-btn color="success" dark class="mb-2" :to="'/addteacher'">New teacher</v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-  
-            <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.Id" label="Id"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.groups" label="Group"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.phone" label="Phone"></v-text-field>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card-text>
-  
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-toolbar>
-        <!-- list's header and list -->
-      <v-data-table
-        :headers="headers"
-        :items="teachers"
-        class="elevation-1"
-        :pagination.sync="pagination"
-      >
-          
-        <template v-slot:items="props">
-             <router-link tag="tr" :to="'/teacher-profile'">
-            <td>{{props.index +1}}</td>
-          <td>{{ props.item.Id }}</td>
-          <td>{{ props.item.name }}</td>
-          <td >{{ props.item.groups }}</td>
-          <td >{{ props.item.phone }}</td>
-          <td class="justify-center layout px-0">
+            <!-- adding new teacher -->
+            <v-spacer/>
+            <v-dialog
+              v-model="dialog"
+              max-width="500px">
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  :to="'/addteacher'"
+                  color="success"
+                  dark
+                  class="mb-2">New teacher</v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">{{ formTitle }}</span>
+                </v-card-title>
 
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(props.item)"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click="deleteItem(props.item)"
-            >
-              mdi-delete
-            </v-icon>
-          </td>
-           </router-link>
-        </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
-        </template>
-      </v-data-table>
-       <div class="text-xs-center pt-2">
-      <v-pagination v-model="pagination.page"  :length="pages"></v-pagination>
-    </div></v-flex> 
-        </v-layout>
-     </v-container>
-    </div>
+                <v-card-text>
+                  <v-container grid-list-md>
+                    <v-layout wrap>
+                      <v-flex
+                        xs12
+                        sm6
+                        md4>
+                        <v-text-field
+                          v-model="editedItem.Id"
+                          label="Id"/>
+                      </v-flex>
+                      <v-flex
+                        xs12
+                        sm6
+                        md4>
+                        <v-text-field
+                          v-model="editedItem.name"
+                          label="Name"/>
+                      </v-flex>
+                      <v-flex
+                        xs12
+                        sm6
+                        md4>
+                        <v-text-field
+                          v-model="editedItem.groups"
+                          label="Group"/>
+                      </v-flex>
+                      <v-flex
+                        xs12
+                        sm6
+                        md4>
+                        <v-text-field
+                          v-model="editedItem.phone"
+                          label="Phone"/>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer/>
+                  <v-btn
+                    color="blue darken-1"
+                    flat
+                    @click="close">Cancel</v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    flat
+                    @click="save">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
+          <!-- list's header and list -->
+          <v-data-table
+            :headers="headers"
+            :items="teachers"
+            :pagination.sync="pagination"
+            class="elevation-1"
+          >
+
+            <template v-slot:items="props">
+              <router-link
+                :to="'/teacher-profile'"
+                tag="tr">
+                <td>{{ props.index +1 }}</td>
+                <td>{{ props.item.Id }}</td>
+                <td>{{ props.item.name }}</td>
+                <td >{{ props.item.groups }}</td>
+                <td >{{ props.item.phone }}</td>
+                <td class="justify-center layout px-0">
+
+                  <v-icon
+                    small
+                    class="mr-2"
+                    @click="editItem(props.item)"
+                  >
+                    mdi-pencil
+                  </v-icon>
+                  <v-icon
+                    small
+                    @click="deleteItem(props.item)"
+                  >
+                    mdi-delete
+                  </v-icon>
+                </td>
+              </router-link>
+            </template>
+            <template v-slot:no-data>
+              <v-btn
+                color="primary"
+                @click="initialize">Reset</v-btn>
+            </template>
+          </v-data-table>
+          <div class="text-xs-center pt-2">
+            <v-pagination
+              v-model="pagination.page"
+              :length="pages"/>
+        </div></v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
 export default {
-    data: () => ({
+  data: () => ({
     dialog: false,
     pagination: {},
     headers: [
@@ -116,13 +156,13 @@ export default {
       Id: 0,
       name: '',
       groups: 0,
-      phone : 0
+      phone: 0
     },
     defaultItem: {
       Id: 0,
-      name: '',     
+      name: '',
       groups: '',
-      phone : 0
+      phone: 0
     }
   }),
 
@@ -131,12 +171,12 @@ export default {
       return this.editedIndex === -1 ? 'New Teacher' : 'Edit Teacher'
     },
     pages () {
-        if (this.pagination.rowsPerPage == null ||
+      if (this.pagination.rowsPerPage == null ||
           this.pagination.totalItems == null
-        ) return 0
+      ) return 0
 
-        return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-      }
+      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+    }
   },
 
   watch: {
@@ -152,30 +192,30 @@ export default {
   methods: {
     initialize () {
       this.teachers = [
-        {        
-          Id: "E1",
-           name: 'Pavel Durov',
-           groups : 7,
-          phone: +998935034403,         
+        {
+          Id: 'E1',
+          name: 'Pavel Durov',
+          groups: 7,
+          phone: +998935034403
         },
         {
-          Id: "E2",
+          Id: 'E2',
           name: 'Ice cream sandwich',
-          groups : 6,
-          phone: +998935034403,         
+          groups: 6,
+          phone: +998935034403
         },
         {
-          Id: "E3",
-          name: 'Eclair',         
-          groups : 4,
-          phone: +998935034403,    
+          Id: 'E3',
+          name: 'Eclair',
+          groups: 4,
+          phone: +998935034403
         },
         {
-          Id: "E4",
-          name: 'Cupcake',        
-          groups : 9,
-          phone: +998935034403,
-         
+          Id: 'E4',
+          name: 'Cupcake',
+          groups: 9,
+          phone: +998935034403
+
         }
       ]
     },

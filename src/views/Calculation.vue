@@ -1,5 +1,5 @@
 <template>
-    <h1>Calculation</h1>
+  <h1>Calculation</h1>
 </template>
 
 <script>

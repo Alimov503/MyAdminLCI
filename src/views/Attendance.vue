@@ -2,49 +2,72 @@
   <v-container fluid>
     <h2 class="grey--text text-xs-center">Attendance</h2>
     <v-layout justify-center>
-      <v-flex d-flex justify-center>
-        <v-card  class="pa-3 mt-3" max-width="900px">
-          <v-layout wrap justify-space-between>
-            <v-flex xs12 sm5 d-flex>
-              <v-select :items="subjects" label="Subjects"  outline v-model="subject"></v-select>
+      <v-flex
+        d-flex
+        justify-center>
+        <v-card
+          class="pa-3 mt-3"
+          max-width="900px">
+          <v-layout
+            wrap
+            justify-space-between>
+            <v-flex
+              xs12
+              sm5
+              d-flex>
+              <v-select
+                :items="subjects"
+                v-model="subject"
+                label="Subjects"
+                outline/>
             </v-flex>
-            <v-flex xs12 sm5 d-flex>
-              <v-select :items="groups" label="Groups"  outline></v-select>
+            <v-flex
+              xs12
+              sm5
+              d-flex>
+              <v-select
+                :items="groups"
+                label="Groups"
+                outline/>
             </v-flex>
             <!-- List of students -->
-            <v-flex xs12 sm5>
+            <v-flex
+              xs12
+              sm5>
               <h2 class="grey--text text-xs-center">Present Students</h2>
               <v-list>
                 <v-list-tile
                   v-for="(student,index) in students"
                   :key="student.name"
                   avatar
-                  @click="absent(index)"
                   class="success"
+                  @click="absent(index)"
                 >
                   <v-list-tile-content>
-                    <v-list-tile-title v-text="student.name"></v-list-tile-title>
+                    <v-list-tile-title v-text="student.name"/>
                   </v-list-tile-content>
 
                   <v-list-tile-avatar>
                     <img :src="student.avatar">
                   </v-list-tile-avatar>
                 </v-list-tile>
-                <v-divider></v-divider>
+                <v-divider/>
               </v-list>
             </v-flex>
-            <v-flex xs12 sm5>
+            <v-flex
+              xs12
+              sm5>
               <h2 class="grey--text text-xs-center">Absent Students</h2>
               <v-list>
                 <v-list-tile
                   v-for="(student,index) in absents"
                   :key="student.name"
                   avatar
-                  @click="present(index)"
                   class="warning "
+                  @click="present(index)"
                 >
                   <v-list-tile-content>
-                    <v-list-tile-title v-text="student.name"></v-list-tile-title>
+                    <v-list-tile-title v-text="student.name"/>
                   </v-list-tile-content>
 
                   <v-list-tile-avatar>
@@ -62,53 +85,53 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      subject: "",
+      subject: '',
       absents: [],
       students: [
         {
-          name: "Adkham Mukhammadjonov",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+          name: 'Adkham Mukhammadjonov',
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
         },
         {
-          name: "Alisherbek Rakhimov",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+          name: 'Alisherbek Rakhimov',
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
         },
         {
-          name: "Sardorbek Rakhimov",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+          name: 'Sardorbek Rakhimov',
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
         },
         {
-          name: "Salimbek Karimboyev",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+          name: 'Salimbek Karimboyev',
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
         }
       ],
-      subjects: ["English", "Mathematics", "Physics", "Russian"],
+      subjects: ['English', 'Mathematics', 'Physics', 'Russian'],
       grps: {
-        English: ["E1", "E2", "E3"],
-        Mathematics: ["M1", "M2", "M3"],
-        Physics: ["P1", "P2", "P3"],
-        Russian: ["R1", "R2", "R3"]
+        English: ['E1', 'E2', 'E3'],
+        Mathematics: ['M1', 'M2', 'M3'],
+        Physics: ['P1', 'P2', 'P3'],
+        Russian: ['R1', 'R2', 'R3']
       }
-    };
+    }
   },
   computed: {
-    groups: function() {
-      return this.grps[this.subject];
+    groups: function () {
+      return this.grps[this.subject]
     }
   },
   methods: {
-    absent(index) {
-      this.absents.push(this.students[index]);
-      this.students.splice(index, 1);
+    absent (index) {
+      this.absents.push(this.students[index])
+      this.students.splice(index, 1)
     },
-    present(index) {
-      this.students.push(this.absents[index]);
-      this.absents.splice(index, 1);
+    present (index) {
+      this.students.push(this.absents[index])
+      this.absents.splice(index, 1)
     }
   }
-};
+}
 </script>
 
 <style>

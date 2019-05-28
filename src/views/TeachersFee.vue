@@ -1,61 +1,61 @@
 <template>
-<div>
+  <div>
     <v-container>
-        <v-layout> 
-            <v-flex>          
-            <h1 >Teachers Fee</h1>
-            <v-layout
+      <v-layout>
+        <v-flex>
+          <h1 >Teachers Fee</h1>
+          <v-layout
             justify-center
+          >
+            <v-flex
+
+              md12
+              xl6
             >
-                <v-flex
-                
-                    md12
-                    xl6
+              <material-card
+                color="orange"
+                title="Teachers Employee Stats"
+                text="Monthly employees of teachers"
+              >
+                <v-data-table
+                  :headers="headers"
+                  :items="items"
+                  hide-actions
                 >
-                    <material-card
-                    color="orange"
-                    title="Teachers Employee Stats"
-                    text="Monthly employees of teachers"
-                    >
-                    <v-data-table
-                        :headers="headers"
-                        :items="items"
-                        hide-actions
-                    >
-                        <template
-                        slot="headerCell"
-                        slot-scope="{ header }"
-                        >
-                        <span
-                            class="font-weight-light text-warning text--darken-3"
-                            v-text="header.text"
-                        />
-                        </template>
-                        <template
-                        slot="items"
-                        slot-scope="{ index, item }"
-                        >
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ item.name }}</td>
-                        <td class="text-xs-right">{{ item.salary }}</td>
-                        <td class="text-xs-center">{{ item.quantityOfGroups }}</td>
-                        <td class="text-xs-center">{{ item.quantityOfStudents }}</td>
-                        </template>
-                    </v-data-table>
-                    </material-card>
-                </v-flex>
-            </v-layout>
+                  <template
+                    slot="headerCell"
+                    slot-scope="{ header }"
+                  >
+                    <span
+                      class="font-weight-light text-warning text--darken-3"
+                      v-text="header.text"
+                    />
+                  </template>
+                  <template
+                    slot="items"
+                    slot-scope="{ index, item }"
+                  >
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ item.name }}</td>
+                    <td class="text-xs-right">{{ item.salary }}</td>
+                    <td class="text-xs-center">{{ item.quantityOfGroups }}</td>
+                    <td class="text-xs-center">{{ item.quantityOfStudents }}</td>
+                  </template>
+                </v-data-table>
+              </material-card>
             </v-flex>
-        </v-layout>
+          </v-layout>
+        </v-flex>
+      </v-layout>
     </v-container>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return {
-            headers: [
+  data () {
+    return {
+      headers: [
         {
           sortable: false,
           text: 'ID',
@@ -113,9 +113,9 @@ export default {
           quantityOfStudents: 28,
           salary: '$63,542'
         }
-      ],
-        }
+      ]
     }
+  }
 }
 </script>
 

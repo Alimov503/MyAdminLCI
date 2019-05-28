@@ -21,23 +21,21 @@ export default [
     path: '/attendance',
     view: 'Attendance'
   },
-  
-  
 
   {
     path: '/add-student',
-    view: "AddStudent",
+    view: 'AddStudent'
 
   },
   {
     path: '/students-list',
-    view: "StudentList",
-    
+    view: 'StudentList'
+
   },
   {
     path: '/student-profile',
-    view: "studentProfile",
-   
+    view: 'studentProfile'
+
   },
   {
     path: '/edit-student-profile',
@@ -51,103 +49,103 @@ export default [
   },
   {
     path: '/add-teacher',
-    view: "AddTeacher",
-    
-  },
-  {
-    path: '/teachers-list',
-    view: "TeacherList",
-    
-  },
-  {
-    path: '/teacher-profile',
-    view: "teacherProfile",
-  
-  },
-  {
-    path: '/add-group',
-    view: "AddGroup",
-   
-  },
-  {
-    path: '/groups-list',
-    view: "GroupList",
-   
-  },
-  {
-    path: '/add-subject',
-    view: "AddSubject",
-   
-  },
-  {
-    path: '/subjects-list',
-    view: "SubjectList",
-  
-  },
-  {
-    path: '/add-exam',
-    view: "AddExam",
-    
-  },
-  {
-    path: '/exams-list',
-    view: "ExamList",
-   
-  },
-  {
-    path: '/teachers-fee',
-    view: "TeachersFee",
- 
-  },
-  {
-    path: '/incoming-by-subject',
-    view: "incomingBySubjects",
-  
-  },
-  {
-    path: '/incoming-by-groups',
-    view: "incomingByGroups",
-  
-  },
-  {
-    path: '/groups-incoming',
-    view: "groupsIncoming",
-  
-  },
-  {
-    path: '/monthly-consumption',
-    view: 'MonthlyConsumption',
-    
-  },
-  {
-    path:'/calculation' ,
-    view: "Calculation",
+    view: 'AddTeacher'
 
   },
   {
-    path:'/noticeboard',
-    view: "NoticeBoard",
-    
+    path: '/teachers-list',
+    view: 'TeacherList'
+
+  },
+  {
+    path: '/teacher-profile',
+    view: 'teacherProfile'
+
+  },
+  {
+    path: '/add-group',
+    view: 'AddGroup'
+
+  },
+  {
+    path: '/groups-list',
+    view: 'GroupList'
+
+  },
+  {
+    path: '/add-subject',
+    view: 'AddSubject'
+
+  },
+  {
+    path: '/subjects-list',
+    view: 'SubjectList'
+
+  },
+  {
+    path: '/add-exam',
+    view: 'AddExam'
+
+  },
+  {
+    path: '/exams-list',
+    view: 'ExamList'
+
+  },
+  {
+    path: '/teachers-fee',
+    view: 'TeachersFee'
+
+  },
+  {
+    path: '/incoming-by-subject',
+    view: 'incomingBySubjects'
+
+  },
+  {
+    path: '/incoming-by-groups',
+    view: 'incomingByGroups'
+
+  },
+  {
+    path: '/groups-incoming',
+    view: 'groupsIncoming'
+
+  },
+  {
+    path: '/monthly-consumption',
+    view: 'MonthlyConsumption'
+
+  },
+  {
+    path: '/calculation',
+    view: 'Calculation'
+
+  },
+  {
+    path: '/noticeboard',
+    view: 'NoticeBoard'
+
   },
   {
     path: '/calendar',
-    view: "Calendar",
-    
+    view: 'Calendar'
+
   },
   {
     path: '/settings',
-    view: "Settings",
-    
+    view: 'Settings'
+
   },
   {
     path: '/about',
-    view: "About",
-    
+    view: 'About'
+
   },
   {
-    path:'/room-control' ,
-    view: "RoomControl",
-    
-  },
+    path: '/room-control',
+    view: 'RoomControl'
+
+  }
 
 ]

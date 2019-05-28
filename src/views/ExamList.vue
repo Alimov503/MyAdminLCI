@@ -1,112 +1,136 @@
 <template>
-    <div>
-        <h1 class="grey--text text-xs-center lighten-3">Exams list</h1>
+  <div>
+    <h1 class="grey--text text-xs-center lighten-3">Exams list</h1>
 
-        <v-container
-        fill-height
-        fluid
-        grid-list-xl>
-        <v-layout>
-          <v-flex>
-        <v-container
-        fill-height
-        fluid
-        grid-list-xl>
-        <v-layout>
-          <v-flex>
-      <v-toolbar flat color="white">
-                <!-- adding new Exam -->
-          
-            <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on">New Exam</v-btn>   
-     </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{formTitle}} </span>
-          </v-card-title>
+    <v-container
+      fill-height
+      fluid
+      grid-list-xl>
+      <v-layout>
+        <v-flex>
+          <v-container
+            fill-height
+            fluid
+            grid-list-xl>
+            <v-layout>
+              <v-flex>
+                <v-toolbar
+                  flat
+                  color="white">
+                  <!-- adding new Exam -->
 
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-               
-                <v-flex>
-                  <v-text-field v-model="editedItem.examName" label="Exam name"></v-text-field>
-                </v-flex>
-                <v-flex>
-                  <v-text-field v-model="editedItem.groupName" label="Groups name"></v-text-field>
-                </v-flex> 
-                <v-flex>
-                  <v-text-field type="number" v-model="editedItem.examData" label="Exam data"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
+                  <v-spacer/>
+                  <v-dialog
+                    v-model="dialog"
+                    max-width="500px">
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        color="primary"
+                        dark
+                        class="mb-2"
+                        v-on="on">New Exam</v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">{{ formTitle }} </span>
+                      </v-card-title>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      </v-toolbar>
+                      <v-card-text>
+                        <v-container grid-list-md>
+                          <v-layout wrap>
 
-         <!-- list's header and list -->
-      <v-data-table
-        :headers="headers"
-        :items="exams"
-        class="elevation-1"
-        :pagination.sync="pagination"
-        hide-actions
-        
-      >
-         
-        <template v-slot:items="props">
-            <td>{{props.index +1}}</td>
-          <td>{{ props.item.examName }}</td>
-          <td>{{ props.item.groupName }}</td>
-          <td>{{ props.item.examData }}</td>
-          <td class="">
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(props.item)"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click="deleteItem(props.item)"
-            >
-              mdi-delete
-            </v-icon>
-          </td>
-        </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
-        </template>
-      </v-data-table>
-       <div class="text-xs-center pt-2">
-      <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-    </div>
-    </v-flex> 
-        </v-layout>
-     </v-container>
-     </v-flex> 
-        </v-layout>
-     </v-container>
-    </div>
+                            <v-flex>
+                              <v-text-field
+                                v-model="editedItem.examName"
+                                label="Exam name"/>
+                            </v-flex>
+                            <v-flex>
+                              <v-text-field
+                                v-model="editedItem.groupName"
+                                label="Groups name"/>
+                            </v-flex>
+                            <v-flex>
+                              <v-text-field
+                                v-model="editedItem.examData"
+                                type="number"
+                                label="Exam data"/>
+                            </v-flex>
+                          </v-layout>
+                        </v-container>
+                      </v-card-text>
 
+                      <v-card-actions>
+                        <v-spacer/>
+                        <v-btn
+                          color="blue darken-1"
+                          flat
+                          @click="close">Cancel</v-btn>
+                        <v-btn
+                          color="blue darken-1"
+                          flat
+                          @click="save">Save</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-toolbar>
+
+                <!-- list's header and list -->
+                <v-data-table
+                  :headers="headers"
+                  :items="exams"
+                  :pagination.sync="pagination"
+                  class="elevation-1"
+                  hide-actions
+
+                >
+
+                  <template v-slot:items="props">
+                    <td>{{ props.index +1 }}</td>
+                    <td>{{ props.item.examName }}</td>
+                    <td>{{ props.item.groupName }}</td>
+                    <td>{{ props.item.examData }}</td>
+                    <td class="">
+                      <v-icon
+                        small
+                        class="mr-2"
+                        @click="editItem(props.item)"
+                      >
+                        mdi-pencil
+                      </v-icon>
+                      <v-icon
+                        small
+                        @click="deleteItem(props.item)"
+                      >
+                        mdi-delete
+                      </v-icon>
+                    </td>
+                  </template>
+                  <template v-slot:no-data>
+                    <v-btn
+                      color="primary"
+                      @click="initialize">Reset</v-btn>
+                  </template>
+                </v-data-table>
+                <div class="text-xs-center pt-2">
+                  <v-pagination
+                    v-model="pagination.page"
+                    :length="pages"/>
+                </div>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 
 </template>
 
 <script>
 export default {
-    data: () => ({
+  data: () => ({
     dialog: false,
-     pagination: {},
+    pagination: {},
     headers: [
       {
         text: '#',
@@ -125,12 +149,12 @@ export default {
     editedItem: {
       examName: '',
       groupName: '',
-      examData : ''
+      examData: ''
     },
     defaultItem: {
-      examName: '',   
-      groupName : '',
-      examData : ''
+      examName: '',
+      groupName: '',
+      examData: ''
     }
   }),
 
@@ -139,12 +163,12 @@ export default {
       return this.editedIndex === -1 ? 'New Exam' : 'Edit Exam'
     },
     pages () {
-        if (this.pagination.rowsPerPage == null ||
+      if (this.pagination.rowsPerPage == null ||
           this.pagination.totalItems == null
-        ) return 0
+      ) return 0
 
-        return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-      }
+      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+    }
   },
 
   watch: {
@@ -159,25 +183,24 @@ export default {
 
   methods: {
     initialize () {
-
       this.exams = [
-        {  examName:  '01',  
-           groupName : 'Pavel Durov' ,
-           examData: '8',            
+        { examName: '01',
+          groupName: 'Pavel Durov',
+          examData: '8'
         },
-        {  examName:  '02', 
-           groupName : 'Matk John' 
- ,          examData: '13',    
+        { examName: '02',
+          groupName: 'Matk John',
+          examData: '13'
         },
-        {  examName:  '03',
-           groupName : 'Stive  Works',
-           examData: '8',
-                     
+        { examName: '03',
+          groupName: 'Stive  Works',
+          examData: '8'
+
         },
-        {  examName:  '04',  
-           groupName : 'Bill Gates',
-           examData: '13',  
-         
+        { examName: '04',
+          groupName: 'Bill Gates',
+          examData: '13'
+
         }
       ]
     },

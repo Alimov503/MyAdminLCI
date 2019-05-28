@@ -43,8 +43,8 @@
                     label="Phone number"
                     class="purple-input"/>
                 </v-flex>
-              
-                 <v-flex
+
+                <v-flex
                   xs12
                   md4>
                   <v-text-field
@@ -52,12 +52,15 @@
                     class="purple-input"/>
                 </v-flex>
 
-                <v-flex xs12 sm6 md5>
+                <v-flex
+                  xs12
+                  sm6
+                  md5>
                   <v-menu
                     v-model="menu2"
-                    dark
                     :close-on-content-click="false"
                     :nudge-right="40"
+                    dark
                     lazy
                     transition="scale-transition"
                     offset-y
@@ -71,9 +74,11 @@
                         prepend-icon="mdi-calendar"
                         readonly
                         v-on="on"
-                      ></v-text-field>
+                      />
                     </template>
-                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                    <v-date-picker
+                      v-model="date"
+                      @input="menu2 = false"/>
                   </v-menu>
                 </v-flex>
 
@@ -85,8 +90,7 @@
                     label="Adress"
                     class="purple-input"/>
                 </v-flex>
-                
-  
+
                 <v-flex xs12>
                   <v-textarea
                     class="purple-input"
@@ -126,7 +130,7 @@
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
-            
+
             <h4 class="card-title font-weight-light">Full name</h4>
             <v-btn
               color="warning"
@@ -146,26 +150,27 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
-  data(){
+  filters: {
+    moment: function (date) {
+      return moment(date).format('MMMM Do YYYY, h:mm:ss a')
+    }
+  },
+  data () {
     return {
       date: new Date().toISOString().substr(0, 10),
       menu: false,
       modal: false,
-      menu2: false,
+      menu2: false
 
     }
   },
   methods: {
-  moment: function () {
-    return moment();
+    moment: function () {
+      return moment()
+    }
   }
-},
-filters: {
-  moment: function (date) {
-    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
-  }
-}
 
 }
 </script>

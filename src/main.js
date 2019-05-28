@@ -17,7 +17,6 @@ import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
 
-
 // Sync store with router
 sync(store, router)
 

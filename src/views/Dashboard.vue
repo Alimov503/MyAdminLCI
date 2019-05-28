@@ -90,7 +90,7 @@
           </template>
         </material-chart-card>
       </v-flex>
-      
+
       <v-flex
         sm6
         xs12
@@ -155,8 +155,6 @@
         />
       </v-flex>
 
-
-
       <v-flex
         md12
         lg6
@@ -194,8 +192,6 @@
         </material-card>
       </v-flex>
 
-
-      
       <v-flex
         md12
         lg6

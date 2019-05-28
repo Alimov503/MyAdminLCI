@@ -1,91 +1,113 @@
 <template>
-    <div>
-        <h1 class="grey--text text-xs-center lighten-3">Subject list</h1>
-        <v-container
-        fill-height
-        fluid
-        grid-list-xl>
-        <v-layout>
-          <v-flex>
-      <v-toolbar flat color="white">
-               <!-- <v-btn color="primary" dark class="mb-2" v-on="on">New subject</v-btn> -->
-                <!-- adding new Subject -->
-            <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on">New subject</v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{formTitle}}</span>
-          </v-card-title>
+  <div>
+    <h1 class="grey--text text-xs-center lighten-3">Subject list</h1>
+    <v-container
+      fill-height
+      fluid
+      grid-list-xl>
+      <v-layout>
+        <v-flex>
+          <v-toolbar
+            flat
+            color="white">
+            <!-- <v-btn color="primary" dark class="mb-2" v-on="on">New subject</v-btn> -->
+            <!-- adding new Subject -->
+            <v-spacer/>
+            <v-dialog
+              v-model="dialog"
+              max-width="500px">
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  color="primary"
+                  dark
+                  class="mb-2"
+                  v-on="on">New subject</v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">{{ formTitle }}</span>
+                </v-card-title>
 
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.subjectName" label="Subject name"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
+                <v-card-text>
+                  <v-container grid-list-md>
+                    <v-layout wrap>
+                      <v-flex
+                        xs12
+                        sm6
+                        md4>
+                        <v-text-field
+                          v-model="editedItem.subjectName"
+                          label="Subject name"/>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card-text>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      </v-toolbar>
+                <v-card-actions>
+                  <v-spacer/>
+                  <v-btn
+                    color="blue darken-1"
+                    flat
+                    @click="close">Cancel</v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    flat
+                    @click="save">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
 
-         <!-- list's header and list -->
-      <v-data-table
-        :headers="headers"
-        :items="subjects"
-        class="elevation-1"
-        :pagination.sync="pagination"
-      >
-         
-        <template v-slot:items="props">
-            <td>{{props.index +1}}</td>
-          <td>{{ props.item.subjectName }}</td>
-          <td class="">
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(props.item)"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click="deleteItem(props.item)"
-            >
-              mdi-delete
-            </v-icon>
-          </td>
-        </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
-        </template>
-      </v-data-table>
-       <div class="text-xs-center pt-2">
-      <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-    </div>
-    </v-flex> 
-        </v-layout>
-     </v-container>
-    </div>
+          <!-- list's header and list -->
+          <v-data-table
+            :headers="headers"
+            :items="subjects"
+            :pagination.sync="pagination"
+            class="elevation-1"
+          >
 
+            <template v-slot:items="props">
+              <td>{{ props.index +1 }}</td>
+              <td>{{ props.item.subjectName }}</td>
+              <td class="">
+                <v-icon
+                  small
+                  class="mr-2"
+                  @click="editItem(props.item)"
+                >
+                  mdi-pencil
+                </v-icon>
+                <v-icon
+                  small
+                  @click="deleteItem(props.item)"
+                >
+                  mdi-delete
+                </v-icon>
+              </td>
+            </template>
+            <template v-slot:no-data>
+              <v-btn
+                color="primary"
+                @click="initialize">Reset</v-btn>
+            </template>
+          </v-data-table>
+          <div class="text-xs-center pt-2">
+            <v-pagination
+              v-model="pagination.page"
+              :length="pages"/>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 
 </template>
 
 <script>
 export default {
-    data: () => ({
+  data: () => ({
     dialog: false,
-     pagination: {},
+    pagination: {},
     headers: [
       {
         text: '#',
@@ -102,12 +124,12 @@ export default {
     editedItem: {
       subjectName: '',
       teachersName: '',
-      quantity : 0
+      quantity: 0
     },
     defaultItem: {
-      subjectName: '',     
+      subjectName: '',
       teachersName: '',
-      quantity : 0
+      quantity: 0
     }
   }),
 
@@ -116,12 +138,12 @@ export default {
       return this.editedIndex === -1 ? 'New Subject' : 'Edit Subject'
     },
     pages () {
-        if (this.pagination.rowsPerPage == null ||
+      if (this.pagination.rowsPerPage == null ||
           this.pagination.totalItems == null
-        ) return 0
+      ) return 0
 
-        return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-      }
+      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+    }
   },
 
   watch: {
@@ -136,17 +158,16 @@ export default {
 
   methods: {
     initialize () {
-
       this.subjects = [
-        {  subjectName:  'English',               
+        { subjectName: 'English'
         },
-        {  subjectName:  'Russian',      
+        { subjectName: 'Russian'
         },
-        {  subjectName:  'Arabic',
-                     
+        { subjectName: 'Arabic'
+
         },
-        {  subjectName:  'German',      
-         
+        { subjectName: 'German'
+
         }
       ]
     },

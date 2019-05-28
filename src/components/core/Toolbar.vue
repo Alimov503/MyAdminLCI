@@ -1,15 +1,15 @@
 <template>
-  <v-toolbar 
+  <v-toolbar
     id="core-toolbar"
     flat
     prominent
     style="background: #eee;"
   >
-   
-      <v-spacer/>
+
+    <v-spacer/>
     <v-toolbar-items>
       <v-flex
-      align-center
+        align-center
         layout
         py-2
       >
