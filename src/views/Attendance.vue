@@ -1,11 +1,11 @@
 <template>
-  <v-container fluid>
-    <h2 class="grey--text text-xs-center">Attendance</h2>
+  <v-container fluid dark>
     <v-layout justify-center>
       <v-flex
         d-flex
-        justify-center>
+        justify-start>
         <v-card
+        dark
           class="pa-3 mt-3"
           max-width="900px">
           <v-layout
@@ -31,10 +31,13 @@
                 outline/>
             </v-flex>
             <!-- List of students -->
-            <v-flex
+             
+                <v-flex
               xs12
               sm5>
               <h2 class="grey--text text-xs-center">Present Students</h2>
+               <transition name = "fade">
+
               <v-list>
                 <v-list-tile
                   v-for="(student,index) in students"
@@ -53,7 +56,9 @@
                 </v-list-tile>
                 <v-divider/>
               </v-list>
+              </transition>
             </v-flex>
+
             <v-flex
               xs12
               sm5>
@@ -76,6 +81,8 @@
                 </v-list-tile>
               </v-list>
             </v-flex>
+
+
           </v-layout>
         </v-card>
       </v-flex>
@@ -135,4 +142,10 @@ export default {
 </script>
 
 <style>
+  .fade-enter-active, .fade-leave-active {
+            transition: opacity 2s
+         }
+         .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0
+         }
 </style>
