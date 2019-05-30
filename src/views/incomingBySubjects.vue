@@ -37,25 +37,25 @@ export default {
       num: 12,
       subjects: [
         { name: 'English',
-          icon: 'Eng',
+          icon: 'EN',
           cash: '11.000.000',
           color: 'info',
           to: '/incoming-by-groups'
         },
         { name: 'Russian',
-          icon: 'Ru',
+          icon: 'RU',
           cash: '8.000.000',
           color: 'red',
           to: '/incoming-by-groups'
         },
         { name: 'Arabic',
-          icon: 'Ar',
+          icon: 'AR',
           cash: '9.000.000',
           color: 'green',
           to: '/incoming-by-groups'
         },
         { name: 'French',
-          icon: 'Fr',
+          icon: 'FR',
           cash: '5.000.000',
           color: 'orange',
           to: '/incoming-by-groups'

@@ -3,7 +3,8 @@
     id="core-toolbar"
     flat
     prominent
-    style="background: #eee;"
+    
+     :active-class="color"
   >
 
     <v-spacer/>
@@ -80,6 +81,8 @@
 import {
   mapMutations
 } from 'vuex'
+
+
 
 export default {
   data: () => ({

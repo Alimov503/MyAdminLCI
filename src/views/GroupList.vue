@@ -19,7 +19,7 @@
               max-width="500px">
               <template v-slot:activator="{ on }">
                 <v-btn
-                  :to="'/addgroup'"
+                  :to="'/add-group'"
                   color="primary"
                   dark
                   class="mb-2">New group</v-btn>
@@ -89,15 +89,14 @@
               <td >{{ props.item.teachersName }}</td>
               <td >{{ props.item.quantity }}</td>
               <td class="">
-                <v-icon
-                  small
-                  class="mr-2"
+                <v-icon                 
+                  color='primary'
                   @click="editItem(props.item)"
                 >
                   mdi-pencil
                 </v-icon>
-                <v-icon
-                  small
+                <v-icon                 
+                  color="red"
                   @click="deleteItem(props.item)"
                 >
                   mdi-delete
@@ -110,11 +109,9 @@
                 @click="initialize">Reset</v-btn>
             </template>
           </v-data-table>
-          <div class="text-xs-center pt-2">
-            <v-pagination
-              v-model="pagination.page"
-              :length="pages"/>
-          </div>
+         <div class="text-xs-center pt-2">
+              <v-pagination v-model="pagination.page" :length="pages" circle/>
+            </div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -194,8 +191,15 @@ export default {
         { groupName: 'E004',
           teachersName: 'Cupcake',
           quantity: 9
-
-        }
+        },
+         { groupName: 'E001',
+          teachersName: 'Pavel Durov',
+          quantity: 7
+        },
+         { groupName: 'E001',
+          teachersName: 'Pavel Durov',
+          quantity: 7
+        },
       ]
     },
 

@@ -7,126 +7,44 @@
       grid-list-xl>
       <v-layout>
         <v-flex>
-          <v-toolbar
-            flat
-            color="white">
-
-            <!-- adding new teacher -->
-            <v-spacer/>
-            <v-dialog
-              v-model="dialog"
-              max-width="500px">
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  :to="'/addteacher'"
-                  color="success"
-                  dark
-                  class="mb-2">New teacher</v-btn>
+          <div>
+            <!-- list's header and list -->
+            <v-data-table
+              :headers="headers"
+              :items="teachers"
+              :pagination.sync="pagination"
+              class="elevation-1"
+             
+            >
+              <template v-slot:items="props">
+                <!-- <router-link :to="'/student-profile'" tag="tr" class="v-hover"> -->
+                  <td class="text-xs-center">{{ props.index +1 }}</td>
+                  <td>{{ props.item.Id }}</td>
+                  <td>
+                    <v-avatar size="36px">
+                      <img
+                        src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=461"
+                        alt="Avatar"
+                      >
+                    </v-avatar>
+                    <span class="ml-4">{{ props.item.name }}</span>                  
+                  </td>
+                  <td>{{props.item.groups}}</td>
+                  <td>{{ props.item.phone }}</td>
+                   <td>
+                    <v-btn small :to="'/student-profile'" dark> <span>view profile</span></v-btn>
+                  </td>               
               </template>
-              <v-card>
-                <v-card-title>
-                  <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-
-                <v-card-text>
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
-                        <v-text-field
-                          v-model="editedItem.Id"
-                          label="Id"/>
-                      </v-flex>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
-                        <v-text-field
-                          v-model="editedItem.name"
-                          label="Name"/>
-                      </v-flex>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
-                        <v-text-field
-                          v-model="editedItem.groups"
-                          label="Group"/>
-                      </v-flex>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
-                        <v-text-field
-                          v-model="editedItem.phone"
-                          label="Phone"/>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-
-                <v-card-actions>
-                  <v-spacer/>
-                  <v-btn
-                    color="blue darken-1"
-                    flat
-                    @click="close">Cancel</v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    flat
-                    @click="save">Save</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
-          <!-- list's header and list -->
-          <v-data-table
-            :headers="headers"
-            :items="teachers"
-            :pagination.sync="pagination"
-            class="elevation-1"
-          >
-
-            <template v-slot:items="props">
-              <router-link
-                :to="'/teacher-profile'"
-                tag="tr">
-                <td>{{ props.index +1 }}</td>
-                <td>{{ props.item.Id }}</td>
-                <td>{{ props.item.name }}</td>
-                <td >{{ props.item.groups }}</td>
-                <td >{{ props.item.phone }}</td>
-                <td class="justify-center layout px-0">
-
-                  <v-icon
-                    small
-                    class="mr-2"
-                    @click="editItem(props.item)"
-                  >
-                    mdi-pencil
-                  </v-icon>
-                  <v-icon
-                    small
-                    @click="deleteItem(props.item)"
-                  >
-                    mdi-delete
-                  </v-icon>
-                </td>
-              </router-link>
-            </template>
-            <template v-slot:no-data>
-              <v-btn
-                color="primary"
-                @click="initialize">Reset</v-btn>
-            </template>
-          </v-data-table>
-          <div class="text-xs-center pt-2">
-            <v-pagination
-              v-model="pagination.page"
-              :length="pages"/>
-        </div></v-flex>
+              <template v-slot:no-data>
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
+              </template>
+            </v-data-table>
+            <div class="text-xs-center pt-2">
+              <v-pagination v-model="pagination.page" :length="pages" circle/>
+            </div>
+          </div>
+          
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
@@ -135,7 +53,6 @@
 <script>
 export default {
   data: () => ({
-    dialog: false,
     pagination: {},
     headers: [
       {
@@ -151,37 +68,15 @@ export default {
       { text: 'Actions', value: 'name', sortable: false }
     ],
     teachers: [],
-    editedIndex: -1,
-    editedItem: {
-      Id: 0,
-      name: '',
-      groups: 0,
-      phone: 0
-    },
-    defaultItem: {
-      Id: 0,
-      name: '',
-      groups: '',
-      phone: 0
-    }
   }),
 
   computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Teacher' : 'Edit Teacher'
-    },
     pages () {
       if (this.pagination.rowsPerPage == null ||
           this.pagination.totalItems == null
       ) return 0
 
       return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-    }
-  },
-
-  watch: {
-    dialog (val) {
-      val || this.close()
     }
   },
 
@@ -219,36 +114,8 @@ export default {
         }
       ]
     },
-
-    editItem (item) {
-      this.editedIndex = this.teachers.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    deleteItem (item) {
-      const index = this.teachers.indexOf(item)
-      confirm('Are you sure you want to delete this teacher?') && this.teachers.splice(index, 1)
-    },
-
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.teachers[this.editedIndex], this.editedItem)
-      } else {
-        this.teachers.push(this.editedItem)
-      }
-      this.close()
-    }
+    }, 
   }
-}
 </script>
 
 <style>

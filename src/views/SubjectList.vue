@@ -70,19 +70,18 @@
               <td>{{ props.index +1 }}</td>
               <td>{{ props.item.subjectName }}</td>
               <td class="">
-                <v-icon
-                  small
-                  class="mr-2"
-                  @click="editItem(props.item)"
-                >
-                  mdi-pencil
-                </v-icon>
-                <v-icon
-                  small
-                  @click="deleteItem(props.item)"
-                >
-                  mdi-delete
-                </v-icon>
+                 <v-icon 
+                      class="mr-2 primary--text" 
+                      :to="'/edit-student-profile'"
+                      @click="editItem(props.item)">
+                      mdi-pencil
+                      </v-icon>
+
+                      <v-icon  class="red--text"
+                      @click="deleteItem(props.item)">
+                      mdi-delete
+                      </v-icon>
+
               </td>
             </template>
             <template v-slot:no-data>
@@ -92,10 +91,8 @@
             </template>
           </v-data-table>
           <div class="text-xs-center pt-2">
-            <v-pagination
-              v-model="pagination.page"
-              :length="pages"/>
-          </div>
+              <v-pagination v-model="pagination.page" :length="pages" circle/>
+            </div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -108,6 +105,7 @@ export default {
   data: () => ({
     dialog: false,
     pagination: {},
+    selected: {},
     headers: [
       {
         text: '#',
@@ -164,7 +162,12 @@ export default {
         { subjectName: 'Russian'
         },
         { subjectName: 'Arabic'
-
+        },
+        { subjectName: 'Arabic'
+        },
+        { subjectName: 'Arabic'
+        },
+        { subjectName: 'Arabic'
         },
         { subjectName: 'German'
 

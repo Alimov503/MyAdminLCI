@@ -80,29 +80,24 @@
                   :items="exams"
                   :pagination.sync="pagination"
                   class="elevation-1"
-                  hide-actions
-
+                  
                 >
-
                   <template v-slot:items="props">
                     <td>{{ props.index +1 }}</td>
                     <td>{{ props.item.examName }}</td>
                     <td>{{ props.item.groupName }}</td>
                     <td>{{ props.item.examData }}</td>
                     <td class="">
-                      <v-icon
-                        small
-                        class="mr-2"
-                        @click="editItem(props.item)"
-                      >
-                        mdi-pencil
-                      </v-icon>
-                      <v-icon
-                        small
-                        @click="deleteItem(props.item)"
-                      >
-                        mdi-delete
-                      </v-icon>
+                      <v-icon 
+                      class="mr-2 primary--text" 
+                      :to="'/edit-student-profile'"
+                      @click="editItem(props.item)"
+                      >mdi-pencil</v-icon>
+
+                      <v-icon  class="red--text"
+                      @click="deleteItem(props.item)"
+                      >mdi-delete</v-icon>
+
                     </td>
                   </template>
                   <template v-slot:no-data>
@@ -112,10 +107,8 @@
                   </template>
                 </v-data-table>
                 <div class="text-xs-center pt-2">
-                  <v-pagination
-                    v-model="pagination.page"
-                    :length="pages"/>
-                </div>
+              <v-pagination v-model="pagination.page" :length="pages" circle/>
+            </div>
               </v-flex>
             </v-layout>
           </v-container>
@@ -131,6 +124,7 @@ export default {
   data: () => ({
     dialog: false,
     pagination: {},
+    selected: {},
     headers: [
       {
         text: '#',
@@ -191,6 +185,21 @@ export default {
         { examName: '02',
           groupName: 'Matk John',
           examData: '13'
+        },
+        { examName: '03',
+          groupName: 'Stive  Works',
+          examData: '8'
+
+        },
+        { examName: '03',
+          groupName: 'Stive  Works',
+          examData: '8'
+
+        },
+        { examName: '03',
+          groupName: 'Stive  Works',
+          examData: '8'
+
         },
         { examName: '03',
           groupName: 'Stive  Works',

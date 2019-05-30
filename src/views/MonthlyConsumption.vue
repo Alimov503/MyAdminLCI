@@ -80,19 +80,19 @@
               <td>{{ props.item.consumptionCost }}</td>
               <td>{{ props.item.consumptionDate }}</td>
               <td class="">
-                <v-icon
-                  small
-                  class="mr-2"
-                  @click="editItem(props.item)"
-                >
-                  mdi-pencil
-                </v-icon>
-                <v-icon
-                  small
-                  @click="deleteItem(props.item)"
-                >
-                  mdi-delete
-                </v-icon>
+                 <v-icon 
+                    class="mr-2 primary--text" 
+                    :to="'/edit-student-profile'"
+                    @click="editItem(props.item)"
+                    >
+                    mdi-pencil
+                    </v-icon>
+
+                    <v-icon  class="red--text"
+                    @click="deleteItem(props.item)"
+                    >
+                    mdi-delete
+                    </v-icon>
               </td>
             </template>
             <template v-slot:no-data>
@@ -109,7 +109,8 @@
     <div class="text-xs-center pt-2">
       <v-pagination
         v-model="pagination.page"
-        :length="pages"/>
+        :length="pages"
+        circle/>
     </div>
 
   </div>
@@ -179,6 +180,21 @@ export default {
         { consumptionName: 'bill for bank',
           consumptionCost: '200.000',
           consumptionDate: '18.05.2019'
+        },
+        { consumptionName: 'bill for water',
+          consumptionCost: '150.000',
+          consumptionDate: '09.05.2019'
+
+        },
+        { consumptionName: 'bill for water',
+          consumptionCost: '150.000',
+          consumptionDate: '09.05.2019'
+
+        },
+        { consumptionName: 'bill for water',
+          consumptionCost: '150.000',
+          consumptionDate: '09.05.2019'
+
         },
         { consumptionName: 'bill for water',
           consumptionCost: '150.000',
