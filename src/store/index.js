@@ -16,6 +16,7 @@ import getters from './getters'
 import modules from './modules'
 import mutations from './mutations'
 import state from './state'
+import auth from './auth'
 
 Vue.use(Vuex)
 

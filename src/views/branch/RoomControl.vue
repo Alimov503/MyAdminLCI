@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1 class="grey--text lighten-3 text-xs-center">Groups list</h1>
-
+    <h1 class="text-xs-center">Rooms list</h1>
     <v-container
       fill-height
       fluid
@@ -11,18 +10,17 @@
           <v-toolbar
             flat
             color="white">
-
-            <!-- adding new group -->
+            <!-- adding new Room -->
             <v-spacer/>
             <v-dialog
               v-model="dialog"
               max-width="500px">
               <template v-slot:activator="{ on }">
                 <v-btn
-                  :to="'/add-group'"
                   color="primary"
                   dark
-                  class="mb-2">New group</v-btn>
+                  class="mb-2"
+                  v-on="on">New Room</v-btn>
               </template>
               <v-card>
                 <v-card-title>
@@ -32,29 +30,22 @@
                 <v-card-text>
                   <v-container grid-list-md>
                     <v-layout wrap>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
+
+                      <v-flex>
                         <v-text-field
-                          v-model="editedItem.groupName"
-                          label="Group name"/>
+                          v-model="editedItem.roomNumber"
+                          label="Room number"/>
                       </v-flex>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
+                      <v-flex>
                         <v-text-field
                           v-model="editedItem.teachersName"
-                          label="Teacher's name"/>
+                          label="Teacher name"/>
                       </v-flex>
-                      <v-flex
-                        xs12
-                        sm6
-                        md4>
+                      <v-flex>
                         <v-text-field
-                          v-model="editedItem.quantity"
-                          label="Quantity of students"/>
+                          v-model="editedItem.capacity"
+                          type="number"
+                          label="Capacity"/>
                       </v-flex>
                     </v-layout>
                   </v-container>
@@ -78,29 +69,30 @@
           <!-- list's header and list -->
           <v-data-table
             :headers="headers"
-            :items="groups"
+            :items="rooms"
             :pagination.sync="pagination"
             class="elevation-1"
           >
 
             <template v-slot:items="props">
               <td>{{ props.index +1 }}</td>
-              <td>{{ props.item.groupName }}</td>
-              <td >{{ props.item.teachersName }}</td>
-              <td >{{ props.item.quantity }}</td>
+              <td>{{ props.item.roomNumber }}</td>
+              <td>{{ props.item.teachersName }}</td>
+              <td>{{ props.item.capacity }}</td>
               <td class="">
-                <v-icon                 
-                  color='primary'
-                  @click="editItem(props.item)"
-                >
-                  mdi-pencil
-                </v-icon>
-                <v-icon                 
-                  color="red"
-                  @click="deleteItem(props.item)"
-                >
-                  mdi-delete
-                </v-icon>
+                 <v-icon 
+                    class="mr-2 primary--text" 
+                    :to="'/edit-student-profile'"
+                    @click="editItem(props.item)"
+                    >
+                    mdi-pencil
+                    </v-icon>
+
+                    <v-icon  class="red--text"
+                    @click="deleteItem(props.item)"
+                    >
+                    mdi-delete
+                    </v-icon>
               </td>
             </template>
             <template v-slot:no-data>
@@ -109,12 +101,18 @@
                 @click="initialize">Reset</v-btn>
             </template>
           </v-data-table>
-         <div class="text-xs-center pt-2">
-              <v-pagination v-model="pagination.page" :length="pages" circle/>
-            </div>
+
         </v-flex>
       </v-layout>
     </v-container>
+
+    <div class="text-xs-center pt-2">
+      <v-pagination
+        v-model="pagination.page"
+        :length="pages"
+        circle/>
+    </div>
+
   </div>
 
 </template>
@@ -124,6 +122,7 @@ export default {
   data: () => ({
     dialog: false,
     pagination: {},
+    selected: {},
     headers: [
       {
         text: '#',
@@ -131,28 +130,27 @@ export default {
         sortable: false,
         value: '1'
       },
-      { text: 'Groups name', value: 'groupName' },
-      { text: 'Teachers name', value: 'teachersName' },
-      { text: 'Quantity of students', value: 'quantity' },
+      { text: 'Room number', value: 'roomNumber' },
+      { text: 'Teacher name', value: 'teacherName' },
+      { text: 'Capacity', value: 'capacity' },
+
       { text: 'Actions', value: 'name', sortable: false }
     ],
-    groups: [],
+    rooms: [],
     editedIndex: -1,
     editedItem: {
-      groupName: '',
-      teachersName: '',
-      quantity: 0
+      roomNumber: '',
+      teachersName: ''
     },
     defaultItem: {
-      groupName: '',
-      teachersName: '',
-      quantity: 0
+      roomNumber: '',
+      teachersName: ''
     }
   }),
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Group' : 'Edit Group'
+      return this.editedIndex === -1 ? 'New Room' : 'Edit Room'
     },
     pages () {
       if (this.pagination.rowsPerPage == null ||
@@ -175,43 +173,49 @@ export default {
 
   methods: {
     initialize () {
-      this.groups = [
-        { groupName: 'E001',
+      this.rooms = [
+        { roomNumber: '01',
           teachersName: 'Pavel Durov',
-          quantity: 7
+          capacity: '8'
         },
-        { groupName: 'E002',
-          teachersName: 'Ice cream sandwich',
-          quantity: 6
+        { roomNumber: '02',
+          teachersName: 'Matk John',
+          capacity: '13'
         },
-        { groupName: 'E003',
-          teachersName: 'Eclair',
-          quantity: 4
+        { roomNumber: '03',
+          teachersName: 'Stive  Works',
+          capacity: '8'
+
         },
-        { groupName: 'E004',
-          teachersName: 'Cupcake',
-          quantity: 9
+        
+        { roomNumber: '03',
+          teachersName: 'Stive  Works',
+          capacity: '8'
+
         },
-         { groupName: 'E001',
-          teachersName: 'Pavel Durov',
-          quantity: 7
+        
+        { roomNumber: '03',
+          teachersName: 'Stive  Works',
+          capacity: '8'
+
         },
-         { groupName: 'E001',
-          teachersName: 'Pavel Durov',
-          quantity: 7
-        },
+        { roomNumber: '04',
+          teachersName: 'Bill Gates',
+          capacity: '13'
+
+        }
       ]
     },
 
     editItem (item) {
-      this.editedIndex = this.groups.indexOf(item)
+      this.editedIndex = this.rooms.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      const index = this.groups.indexOf(item)
-      confirm('Are you sure you want to delete this group?') && this.groups.splice(index, 1)
+      const index = this.rooms.indexOf(item)
+      confirm('Are you sure you want to delete this room?') && this.rooms.splice(index, 1)
     },
 
     close () {
@@ -224,12 +228,16 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.teachers[this.editedIndex], this.editedItem)
+        Object.assign(this.rooms[this.editedIndex], this.editedItem)
       } else {
-        this.groups.push(this.editedItem)
+        this.rooms.push(this.editedItem)
       }
       this.close()
     }
   }
 }
 </script>
+
+<style>
+
+</style>

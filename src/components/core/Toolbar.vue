@@ -3,10 +3,11 @@
     id="core-toolbar"
     flat
     prominent
-    
-     :active-class="color"
-  >
 
+  >
+    <a href="/login" @click.prevent="$emit('click')">
+    <v-icon class="pp" color="tertiary">mdi-view-dashboard</v-icon>
+    </a>
     <v-spacer/>
     <v-toolbar-items>
       <v-flex
@@ -64,13 +65,14 @@
             </v-list>
           </v-card>
         </v-menu>
-        <router-link
+        <a
           v-ripple
           class="toolbar-items"
-          to="/user-profile"
+          href="/login"
+          @click.prevent="logout"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
-        </router-link>
+        </a>
       </v-flex>
     </v-toolbar-items>
   </v-toolbar>
@@ -113,6 +115,14 @@ export default {
   },
 
   methods: {
+   async logout(){
+      let exit = confirm('Are you sure ?')
+
+      if(exit){
+      await this.$store.dispatch('logout')
+      this.$router.push('/login')
+      }
+    },
     ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
     onClickBtn () {
       this.setDrawer(!this.$store.state.app.drawer)
@@ -129,11 +139,14 @@ export default {
         this.responsiveInput = true
       }
     }
-  }
+  },
 }
 </script>
 
 <style>
+.pp{
+  padding-left: 60px
+}
   #core-toolbar a {
     text-decoration: none;
   }

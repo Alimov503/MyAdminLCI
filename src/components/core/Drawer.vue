@@ -10,6 +10,7 @@
     persistent
     mobile-break-point="991"
     width="310"
+    :class="{open: value}"
   >
     <!-- Background image -->
     <v-img
@@ -107,6 +108,7 @@ import {
 } from 'vuex'
 
 export default {
+  props:['value'],
   data: () => ({
     logo: './img/c.jpg',
     itemss: [

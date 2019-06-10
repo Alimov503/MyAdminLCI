@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="grey--text text-xs-center">Rooms list</h1>
+    <h1 class="text-xs-center">Subject list</h1>
     <v-container
       fill-height
       fluid
@@ -10,7 +10,8 @@
           <v-toolbar
             flat
             color="white">
-            <!-- adding new Room -->
+            <!-- <v-btn color="primary" dark class="mb-2" v-on="on">New subject</v-btn> -->
+            <!-- adding new Subject -->
             <v-spacer/>
             <v-dialog
               v-model="dialog"
@@ -20,7 +21,7 @@
                   color="primary"
                   dark
                   class="mb-2"
-                  v-on="on">New Room</v-btn>
+                  v-on="on">New subject</v-btn>
               </template>
               <v-card>
                 <v-card-title>
@@ -30,22 +31,13 @@
                 <v-card-text>
                   <v-container grid-list-md>
                     <v-layout wrap>
-
-                      <v-flex>
+                      <v-flex
+                        xs12
+                        sm6
+                        md4>
                         <v-text-field
-                          v-model="editedItem.roomNumber"
-                          label="Room number"/>
-                      </v-flex>
-                      <v-flex>
-                        <v-text-field
-                          v-model="editedItem.teachersName"
-                          label="Teacher name"/>
-                      </v-flex>
-                      <v-flex>
-                        <v-text-field
-                          v-model="editedItem.capacity"
-                          type="number"
-                          label="Capacity"/>
+                          v-model="editedItem.subjectName"
+                          label="Subject name"/>
                       </v-flex>
                     </v-layout>
                   </v-container>
@@ -69,30 +61,27 @@
           <!-- list's header and list -->
           <v-data-table
             :headers="headers"
-            :items="rooms"
+            :items="subjects"
             :pagination.sync="pagination"
             class="elevation-1"
           >
 
             <template v-slot:items="props">
               <td>{{ props.index +1 }}</td>
-              <td>{{ props.item.roomNumber }}</td>
-              <td>{{ props.item.teachersName }}</td>
-              <td>{{ props.item.capacity }}</td>
+              <td>{{ props.item.subjectName }}</td>
               <td class="">
                  <v-icon 
-                    class="mr-2 primary--text" 
-                    :to="'/edit-student-profile'"
-                    @click="editItem(props.item)"
-                    >
-                    mdi-pencil
-                    </v-icon>
+                      class="mr-2 primary--text" 
+                      :to="'/edit-student-profile'"
+                      @click="editItem(props.item)">
+                      mdi-pencil
+                      </v-icon>
 
-                    <v-icon  class="red--text"
-                    @click="deleteItem(props.item)"
-                    >
-                    mdi-delete
-                    </v-icon>
+                      <v-icon  class="red--text"
+                      @click="deleteItem(props.item)">
+                      mdi-delete
+                      </v-icon>
+
               </td>
             </template>
             <template v-slot:no-data>
@@ -101,18 +90,12 @@
                 @click="initialize">Reset</v-btn>
             </template>
           </v-data-table>
-
+          <div class="text-xs-center pt-2">
+              <v-pagination v-model="pagination.page" :length="pages" circle/>
+            </div>
         </v-flex>
       </v-layout>
     </v-container>
-
-    <div class="text-xs-center pt-2">
-      <v-pagination
-        v-model="pagination.page"
-        :length="pages"
-        circle/>
-    </div>
-
   </div>
 
 </template>
@@ -130,27 +113,27 @@ export default {
         sortable: false,
         value: '1'
       },
-      { text: 'Room number', value: 'roomNumber' },
-      { text: 'Teacher name', value: 'teacherName' },
-      { text: 'Capacity', value: 'capacity' },
+      { text: 'Subject name', value: 'subjectName' },
 
       { text: 'Actions', value: 'name', sortable: false }
     ],
-    rooms: [],
+    subjects: [],
     editedIndex: -1,
     editedItem: {
-      roomNumber: '',
-      teachersName: ''
+      subjectName: '',
+      teachersName: '',
+      quantity: 0
     },
     defaultItem: {
-      roomNumber: '',
-      teachersName: ''
+      subjectName: '',
+      teachersName: '',
+      quantity: 0
     }
   }),
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Room' : 'Edit Room'
+      return this.editedIndex === -1 ? 'New Subject' : 'Edit Subject'
     },
     pages () {
       if (this.pagination.rowsPerPage == null ||
@@ -173,49 +156,34 @@ export default {
 
   methods: {
     initialize () {
-      this.rooms = [
-        { roomNumber: '01',
-          teachersName: 'Pavel Durov',
-          capacity: '8'
+      this.subjects = [
+        { subjectName: 'English'
         },
-        { roomNumber: '02',
-          teachersName: 'Matk John',
-          capacity: '13'
+        { subjectName: 'Russian'
         },
-        { roomNumber: '03',
-          teachersName: 'Stive  Works',
-          capacity: '8'
-
+        { subjectName: 'Arabic'
         },
-        
-        { roomNumber: '03',
-          teachersName: 'Stive  Works',
-          capacity: '8'
-
+        { subjectName: 'Arabic'
         },
-        
-        { roomNumber: '03',
-          teachersName: 'Stive  Works',
-          capacity: '8'
-
+        { subjectName: 'Arabic'
         },
-        { roomNumber: '04',
-          teachersName: 'Bill Gates',
-          capacity: '13'
+        { subjectName: 'Arabic'
+        },
+        { subjectName: 'German'
 
         }
       ]
     },
 
     editItem (item) {
-      this.editedIndex = this.rooms.indexOf(item)
+      this.editedIndex = this.subjects.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      const index = this.rooms.indexOf(item)
-      confirm('Are you sure you want to delete this room?') && this.rooms.splice(index, 1)
+      const index = this.subjects.indexOf(item)
+      confirm('Are you sure you want to delete this subject?') && this.subjects.splice(index, 1)
     },
 
     close () {
@@ -228,9 +196,9 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.rooms[this.editedIndex], this.editedItem)
+        Object.assign(this.subjects[this.editedIndex], this.editedItem)
       } else {
-        this.rooms.push(this.editedItem)
+        this.subjects.push(this.editedItem)
       }
       this.close()
     }

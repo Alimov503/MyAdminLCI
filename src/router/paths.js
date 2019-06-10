@@ -4,148 +4,170 @@
  * official documentation https://router.vuejs.org/en/
  */
 export default [
+               // APP 
   {
     path: '/dashboard',
     // Relative to /src/views
-    view: 'Dashboard'
+    view: 'app/Dashboard',
+    meta: {layout: 'main'}
   },
   {
-    path: '/maps',
-    view: 'Maps'
+    path: '/login',
+    view: 'app/login',
+    meta: {layout: 'empty'}
   },
   {
-    path: '/notifications',
-    view: 'Notifications'
+    path: '/logini',
+    view: 'app/Logini',
+    meta: {layout: 'empty'}
+  },
+  {
+    path: '/register',
+    view: 'app/register',
+    meta: {layout: 'empty'}
   },
   {
     path: '/attendance',
-    view: 'Attendance'
+    view: 'app/Attendance',
+    meta: {layout: 'main'}
   },
+  {
+    path: '/noticeboard',
+    view: 'app/NoticeBoard',
+    meta: {layout: 'main'}
 
+  },
+  {
+    path: '/settings',
+    view: 'app/Settings',
+    meta: {layout: 'main'}
+
+  },
+  {
+    path: '/about',
+    view: 'app/About',
+    meta: {layout: 'main'}
+
+  },
+            // STUDENTS
   {
     path: '/add-student',
-    view: 'AddStudent'
+    view: 'students/AddStudent',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/students-list',
-    view: 'StudentList'
+    view: 'students/StudentList',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/student-profile',
-    view: 'studentProfile'
+    view: 'students/studentProfile',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/edit-student-profile',
     name: 'editStudentProfile',
-    view: 'editStudentProfile'
+    view: 'students/editStudentProfile',
+    meta: {layout: 'main'}
   },
+
+              // TEACHERS
   {
     path: '/edit-teacher-profile',
     name: 'editTeacherProfile',
-    view: 'editTeacherProfile'
+    view: 'teachers/editTeacherProfile',
+    meta: {layout: 'main'}
   },
   {
     path: '/add-teacher',
-    view: 'AddTeacher'
+    view: 'teachers/AddTeacher',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/teachers-list',
-    view: 'TeacherList'
+    view: 'teachers/TeacherList',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/teacher-profile',
-    view: 'teacherProfile'
+    view: 'teachers/teacherProfile',
+    meta: {layout: 'main'}
 
   },
+          // GROUPS
   {
     path: '/add-group',
-    view: 'AddGroup'
+    view: 'groups/AddGroup',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/groups-list',
-    view: 'GroupList'
+    view: 'groups/GroupList',
+    meta: {layout: 'main'}
 
-  },
-  {
-    path: '/add-subject',
-    view: 'AddSubject'
-
-  },
+  }, 
+          // Btanch
   {
     path: '/subjects-list',
-    view: 'SubjectList'
-
-  },
-  {
-    path: '/add-exam',
-    view: 'AddExam'
+    view: 'branch/SubjectList',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/exams-list',
-    view: 'ExamList'
+    view: 'branch/ExamList',
+    meta: {layout: 'main'}
+
+  },   
+  {
+    path: '/room-control',
+    view: 'branch/RoomControl',
+    meta: {layout: 'main'}
 
   },
+            // Calculation
   {
     path: '/teachers-fee',
-    view: 'TeachersFee'
+    view: 'calculation/TeachersFee',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/incoming-by-subject',
-    view: 'incomingBySubjects'
+    view: 'calculation/incomingBySubjects',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/incoming-by-groups',
-    view: 'incomingByGroups'
+    view: 'calculation/incomingByGroups',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/groups-incoming',
-    view: 'groupsIncoming'
+    view: 'calculation/groupsIncoming',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/monthly-consumption',
-    view: 'MonthlyConsumption'
+    view: 'calculation/MonthlyConsumption',
+    meta: {layout: 'main'}
 
   },
   {
     path: '/calculation',
-    view: 'Calculation'
+    view: 'calculation/Calculation',
+    meta: {layout: 'main'}
 
   },
-  {
-    path: '/noticeboard',
-    view: 'NoticeBoard'
-
-  },
-  {
-    path: '/calendar',
-    view: 'Calendar'
-
-  },
-  {
-    path: '/settings',
-    view: 'Settings'
-
-  },
-  {
-    path: '/about',
-    view: 'About'
-
-  },
-  {
-    path: '/room-control',
-    view: 'RoomControl'
-
-  }
 
 ]

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="grey--text text-xs-center">Teachers list</h1>
+    <h1 class="text-xs-center">Teachers list</h1>
     <v-container
       fill-height
       fluid
